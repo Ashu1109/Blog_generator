@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-dotenv
+crewai
+crewai_tools
+python-dotenv
+langchain_community
+schedule
+pydantic
+prisma
+apscheduler
+asyncio-mqtt
+psycopg2-binary
+python-dateutil

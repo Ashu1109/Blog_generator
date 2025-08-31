@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "blogwriter-crewai"
+version = "0.1.0"
+authors = [{ name = "Aayush Kumar" }]
+description = "A CrewAI-based blog writer application"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "python-dotenv",
+  "crewai",
+  "crewai-tools",
+  "pydantic",
+  "prisma",
+  "apscheduler",
+  "asyncio-mqtt",
+  "psycopg2-binary",
+  "python-dateutil",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Ashu1109/blogwriter_CrewAi"
