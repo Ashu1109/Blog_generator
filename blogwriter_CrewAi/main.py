@@ -110,6 +110,7 @@ app.add_middleware(
 # Pydantic models for API
 class BlogGenerationRequest(BaseModel):
     topic: Optional[str] = None
+    theme: Optional[str] = None  # "genai", "blockchain", or None for random
     
 class SchedulerConfig(BaseModel):
     interval_minutes: int = 10
@@ -180,15 +181,11 @@ async def generate_blog_post(request: BlogGenerationRequest, background_tasks: B
     """Manually trigger blog post generation."""
     try:
         if request.topic:
-            # Generate with custom topic
-            result = await blog_generator.generate_blog_post(custom_topic=request.topic)
+            # Generate with custom topic and optional theme
+            result = await blog_generator.generate_blog_post(custom_topic=request.topic, theme=request.theme)
         else:
-            # Generate with random topic
-            background_tasks.add_task(trigger_blog_generation)
-            return {
-                "message": "Blog generation started in background",
-                "timestamp": datetime.now().isoformat()
-            }
+            # Generate with random topic and theme
+            result = await blog_generator.generate_blog_post(theme=request.theme)
         
         if result:
             return {

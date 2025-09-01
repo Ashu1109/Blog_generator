@@ -1,0 +1,6 @@
+2025-09-01T17:29:50: /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:918: UserWarning: Mixing V1 models and V2 models (or constructs, like `TypeAdapter`) is not supported. Please upgrade `CrewAgentExecutor` to V2.
+2025-09-01T17:29:50:   warn(
+2025-09-01T17:29:51: INFO:     Started server process [12527]
+2025-09-01T17:29:51: INFO:     Waiting for application startup.
+2025-09-01T17:29:53: INFO:     Application startup complete.
+2025-09-01T17:29:53: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)

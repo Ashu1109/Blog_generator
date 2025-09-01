@@ -4,7 +4,7 @@ module.exports = {
       name: "blog-generator-api",
       script: "main.py",
       interpreter: "python3",
-      cwd: "/home/ubuntu/Blog_generator/blogwriter_CrewAi",
+      cwd: "/Users/aayushkaayushumar/Desktop/blog/blogwriter_CrewAi",
       env: {
         NODE_ENV: "production",
         RUN_MODE: "api",
@@ -27,7 +27,7 @@ module.exports = {
       name: "blog-generator-standalone",
       script: "main.py",
       interpreter: "python3",
-      cwd: "/home/ubuntu/Blog_generator/blogwriter_CrewAi",
+      cwd: "/Users/aayushkaayushumar/Desktop/blog/blogwriter_CrewAi",
       env: {
         RUN_MODE: "standalone",
       },

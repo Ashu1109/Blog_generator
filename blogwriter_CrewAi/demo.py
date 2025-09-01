@@ -42,20 +42,41 @@ async def demo_blog_generation():
         print("\n📝 Generating test blog post...")
         print("This may take 2-5 minutes depending on AI response times...")
         
-        test_topic = "Latest developments in Large Language Models and their applications in 2024"
+        # Test both themes
+        print("Testing GenAI theme...")
+        genai_result = await blog_generator.generate_blog_post(
+            custom_topic="Latest developments in Large Language Models and their applications in 2024",
+            theme="genai"
+        )
         
-        result = await blog_generator.generate_blog_post(custom_topic=test_topic)
+        print("Testing Blockchain theme...")
+        blockchain_result = await blog_generator.generate_blog_post(
+            custom_topic="DeFi protocols and decentralized finance innovations in 2024", 
+            theme="blockchain"
+        )
         
-        if result:
-            print(f"\n🎉 Blog post generated successfully!")
-            print(f"   Title: {result['title']}")
-            print(f"   Topic: {result['topic']}")
-            print(f"   Word Count: {result['word_count']}")
-            print(f"   Tags: {', '.join(result['tags'])}")
-            print(f"   Created: {result['created_at']}")
-            print(f"   Database ID: {result['id']}")
-        else:
-            print("❌ Blog generation failed")
+        print("Testing Random theme selection...")
+        random_result = await blog_generator.generate_blog_post()  # Random theme
+        
+        # Show results for all tests
+        results = [
+            ("GenAI", genai_result),
+            ("Blockchain", blockchain_result), 
+            ("Random", random_result)
+        ]
+        
+        for theme_name, result in results:
+            if result:
+                print(f"\n🎉 {theme_name} blog post generated successfully!")
+                print(f"   Title: {result['title']}")
+                print(f"   Topic: {result['topic']}")
+                print(f"   Word Count: {result['word_count']}")
+                print(f"   Tags: {', '.join(result['tags'])}")
+                print(f"   Database ID: {result['id']}")
+            else:
+                print(f"❌ {theme_name} blog generation failed")
+        
+
         
         # Show recent posts
         print("\n📚 Recent blog posts:")
@@ -95,6 +116,7 @@ async def demo_scheduler():
         
         print("Scheduler features:")
         print("  • Automatic blog generation every 10 minutes (configurable)")
+        print("  • Random theme selection (GenAI or Blockchain)")
         print("  • Statistics reporting every hour")
         print("  • Daily cleanup jobs")
         print("  • Manual trigger capability")
@@ -118,7 +140,10 @@ def show_api_examples():
     
     examples = [
         ("Health Check", "GET /health", "curl http://localhost:8000/health"),
-        ("Generate Blog", "POST /generate", 'curl -X POST "http://localhost:8000/generate" -H "Content-Type: application/json" -d \'{"topic": "AI Agents in 2024"}\''),
+        ("Generate Random Theme", "POST /generate", 'curl -X POST "http://localhost:8000/generate" -H "Content-Type: application/json" -d \'{}\''),
+        ("Generate GenAI Blog", "POST /generate", 'curl -X POST "http://localhost:8000/generate" -H "Content-Type: application/json" -d \'{"theme": "genai"}\''),
+        ("Generate Blockchain Blog", "POST /generate", 'curl -X POST "http://localhost:8000/generate" -H "Content-Type: application/json" -d \'{"theme": "blockchain"}\''),
+        ("Custom Topic + Theme", "POST /generate", 'curl -X POST "http://localhost:8000/generate" -H "Content-Type: application/json" -d \'{"topic": "DeFi innovations", "theme": "blockchain"}\''),
         ("Get Recent Posts", "GET /posts", "curl http://localhost:8000/posts?limit=5"),
         ("Get Statistics", "GET /stats", "curl http://localhost:8000/stats?hours=24"),
         ("Start Scheduler", "POST /scheduler/start", 'curl -X POST "http://localhost:8000/scheduler/start" -H "Content-Type: application/json" -d \'{"interval_minutes": 10}\''),

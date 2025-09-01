@@ -48,6 +48,30 @@ class EnhancedBlogGenerator:
         "AI in education and personalized learning systems"
     ]
     
+    # Comprehensive blockchain topics for dynamic content
+    BLOCKCHAIN_TOPICS = [
+        "Bitcoin and cryptocurrency market developments",
+        "Ethereum 2.0 and proof-of-stake consensus mechanisms",
+        "Decentralized Finance (DeFi) protocols and innovations",
+        "Non-Fungible Tokens (NFTs) and digital asset ownership",
+        "Smart contracts and automated execution systems",
+        "Layer 2 scaling solutions and blockchain interoperability",
+        "Central Bank Digital Currencies (CBDCs) and digital payments",
+        "Blockchain security and cryptographic advances",
+        "Web3 and decentralized internet infrastructure",
+        "Decentralized Autonomous Organizations (DAOs) governance",
+        "Blockchain in supply chain management and transparency",
+        "Cross-chain bridges and multi-blockchain ecosystems",
+        "Blockchain gaming and play-to-earn economies",
+        "Environmental impact and sustainable blockchain solutions",
+        "Regulatory developments and blockchain compliance",
+        "Blockchain identity management and privacy solutions",
+        "Tokenization of real-world assets and securities",
+        "Blockchain in healthcare and medical record management",
+        "Decentralized storage solutions and data sovereignty",
+        "Blockchain adoption in enterprise and institutional settings"
+    ]
+    
     def __init__(self):
         self.search_tool = SerperDevTool()
         self.setup_agents()
@@ -62,9 +86,9 @@ class EnhancedBlogGenerator:
         }
         
         self.research_agent = Agent(
-            role="AI Research Specialist",
-            goal="Research the latest trends and developments in generative AI efficiently.",
-            backstory="You are an AI researcher who creates concise, informative summaries of the latest developments in generative AI.",
+            role="Technology Research Specialist",
+            goal="Research the latest trends and developments in AI and blockchain technology efficiently.",
+            backstory="You are a technology researcher who creates concise, informative summaries of the latest developments in AI, blockchain, and emerging technologies. You have deep knowledge of both generative AI and blockchain ecosystems.",
             verbose=False,  # Reduce verbosity to save tokens
             allow_delegation=False,  # Disable delegation to save tokens
             tools=[self.search_tool],
@@ -73,8 +97,8 @@ class EnhancedBlogGenerator:
         
         self.writer_agent = Agent(
             role="Senior Tech Blog Writer",
-            goal="Write well-structured, engaging blog posts about generative AI in proper markdown format.",
-            backstory="You are an experienced technology writer who creates clear, informative content about AI and emerging technologies.",
+            goal="Write well-structured, engaging blog posts about AI and blockchain technology in proper markdown format.",
+            backstory="You are an experienced technology writer who creates clear, informative content about AI, blockchain, cryptocurrency, and emerging technologies. You can adapt your writing style for both technical AI topics and blockchain/crypto subjects.",
             verbose=False,
             allow_delegation=False,
             tools=[self.search_tool],
@@ -84,15 +108,26 @@ class EnhancedBlogGenerator:
         self.editor_agent = Agent(
             role="Content Editor and SEO Specialist",
             goal="Edit and optimize blog content for web publication with proper markdown formatting.",
-            backstory="You are a content editor who ensures all content is polished, properly formatted, and optimized for web publication.",
+            backstory="You are a content editor who ensures all content is polished, properly formatted, and optimized for web publication. You have experience editing both AI and blockchain content.",
             verbose=False,
             allow_delegation=False,
             llm_config=model_config
         )
     
-    def generate_dynamic_topic(self) -> str:
-        """Generate a dynamic topic for blog generation."""
-        base_topic = random.choice(self.GENERATIVE_AI_TOPICS)
+    def generate_dynamic_topic(self, theme: Optional[str] = None) -> str:
+        """Generate a dynamic topic for blog generation.
+        
+        Args:
+            theme: The theme to generate topics for ('genai', 'blockchain', or None for random)
+        """
+        # Randomly select theme if not provided
+        if not theme:
+            theme = random.choice(["genai", "blockchain"])
+            
+        if theme.lower() == "blockchain":
+            base_topic = random.choice(self.BLOCKCHAIN_TOPICS)
+        else:
+            base_topic = random.choice(self.GENERATIVE_AI_TOPICS)
         
         # Add current context or trending aspects
         current_year = datetime.now().year
@@ -108,17 +143,36 @@ class EnhancedBlogGenerator:
         aspect = random.choice(trending_aspects)
         return f"{base_topic} - {aspect}"
     
-    def create_research_task(self, topic: str) -> Task:
-        """Create a research task for the given topic."""
+    def create_research_task(self, topic: str, theme: str = "genai") -> Task:
+        """Create a research task for the given topic.
+        
+        Args:
+            topic: The specific topic to research
+            theme: The theme context ('genai' or 'blockchain')
+        """
+        if theme.lower() == "blockchain":
+            focus_areas = """
+            Focus on these key areas:
+            1. Latest blockchain/cryptocurrency developments and breakthroughs (2-3 key points)
+            2. Major blockchain platforms, protocols, and projects involved
+            3. Current market trends, adoption rates, and trading volumes
+            4. Real-world applications, use cases, and institutional adoption
+            5. Regulatory developments and compliance considerations
+            """
+        else:
+            focus_areas = """
+            Focus on these key areas:
+            1. Latest AI developments and breakthroughs (2-3 key points)
+            2. Major companies and technologies involved
+            3. Current market trends and adoption
+            4. Real-world applications and use cases
+            """
+        
         return Task(
             description=f"""
             Research the latest information about: {topic}
             
-            Focus on these key areas:
-            1. Latest developments and breakthroughs (2-3 key points)
-            2. Major companies and technologies involved
-            3. Current market trends and adoption
-            4. Real-world applications and use cases
+            {focus_areas}
             
             Keep your research summary concise but informative - aim for 200-300 words maximum.
             Include 2-3 key statistics or facts.
@@ -127,13 +181,48 @@ class EnhancedBlogGenerator:
             agent=self.research_agent,
         )
     
-    def create_writing_task(self, topic: str) -> Task:
-        """Create a writing task for the given topic."""
+    def create_writing_task(self, topic: str, theme: str = "genai") -> Task:
+        """Create a writing task for the given topic.
+        
+        Args:
+            topic: The specific topic to write about
+            theme: The theme context ('genai' or 'blockchain')
+        """
+        if theme.lower() == "blockchain":
+            content_guidance = """
+            Content should cover:
+            - Technical aspects of blockchain/cryptocurrency technology
+            - Market analysis and price movements (if relevant)
+            - Regulatory landscape and compliance considerations
+            - Real-world adoption and use cases
+            - Security implications and best practices
+            - Future outlook and industry predictions
+            
+            Use appropriate blockchain terminology and explain technical concepts clearly.
+            Include relevant market data, adoption statistics, and regulatory updates.
+            """
+            tags_example = "**Tags:** blockchain, cryptocurrency, DeFi, Web3, Bitcoin"
+        else:
+            content_guidance = """
+            Content should cover:
+            - Technical developments in AI/ML
+            - Industry applications and use cases
+            - Ethical considerations and challenges
+            - Future implications and predictions
+            - Practical implementation examples
+            
+            Use appropriate AI/ML terminology and explain technical concepts clearly.
+            Include relevant research findings, adoption statistics, and industry insights.
+            """
+            tags_example = "**Tags:** AI, machine learning, generative AI, technology, innovation"
+        
         return Task(
             description=f"""
             Write a well-structured blog post about: {topic}
             
             IMPORTANT: Format the output as proper Markdown for web publishing.
+            
+            {content_guidance}
             
             Requirements:
             1. Write 800-1200 words (concise but comprehensive)
@@ -162,7 +251,7 @@ class EnhancedBlogGenerator:
             ## Conclusion
             Strong conclusion with actionable insights...
             
-            **Tags:** tag1, tag2, tag3, tag4, tag5
+            {tags_example}
             
             Keep content focused and avoid overly long sections to prevent token limits.
             """,
@@ -304,19 +393,23 @@ class EnhancedBlogGenerator:
             logger.error(f"Error formatting markdown: {e}")
             return content
     
-    async def generate_blog_post(self, custom_topic: Optional[str] = None) -> Optional[Dict[str, Any]]:
+    async def generate_blog_post(self, custom_topic: Optional[str] = None, theme: Optional[str] = None) -> Optional[Dict[str, Any]]:
         """Generate a blog post and save it to the database."""
         try:
+            # Randomly select theme if not provided
+            if not theme:
+                theme = random.choice(["genai", "blockchain"])
+            
             # Generate or use provided topic
-            topic = custom_topic or self.generate_dynamic_topic()
-            logger.info(f"Generating blog post for topic: {topic}")
+            topic = custom_topic or self.generate_dynamic_topic(theme=theme)
+            logger.info(f"Generating blog post for topic: {topic} (theme: {theme})")
             
             # Log generation attempt
             await log_generation(topic, "in_progress")
             
-            # Create tasks
-            research_task = self.create_research_task(topic)
-            writing_task = self.create_writing_task(topic)
+            # Create tasks with theme context
+            research_task = self.create_research_task(topic, theme=theme)
+            writing_task = self.create_writing_task(topic, theme=theme)
             editing_task = self.create_editing_task()
             
             # Set up crew
