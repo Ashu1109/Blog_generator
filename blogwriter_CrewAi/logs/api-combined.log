@@ -307,3 +307,210 @@
 2025-09-01T17:31:46:             
 2025-09-01T17:31:46:             Keep content focused and avoid overly long sections to prevent token limits.
 2025-09-01T17:31:46:             [00m
+2025-09-01T18:02:09: /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:918: UserWarning: Mixing V1 models and V2 models (or constructs, like `TypeAdapter`) is not supported. Please upgrade `CrewAgentExecutor` to V2.
+2025-09-01T18:02:09:   warn(
+2025-09-01T18:02:09: INFO:     Started server process [96998]
+2025-09-01T18:02:09: INFO:     Waiting for application startup.
+2025-09-01T18:02:14: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
+2025-09-01T18:02:20: 2025-09-01 18:02:20,548 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 1 failed: Could not connect to the query engine
+2025-09-01T18:02:30: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
+2025-09-01T18:02:35: 2025-09-01 18:02:35,936 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 2 failed: Could not connect to the query engine
+2025-09-01T18:02:40: ERROR:    Traceback (most recent call last):
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+2025-09-01T18:02:40:     yield
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+2025-09-01T18:02:40:     resp = await self._pool.handle_async_request(req)
+2025-09-01T18:02:40:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+2025-09-01T18:02:40:     raise exc from None
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+2025-09-01T18:02:40:     response = await connection.handle_async_request(
+2025-09-01T18:02:40:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+2025-09-01T18:02:40:     raise exc
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+2025-09-01T18:02:40:     stream = await self._connect(request)
+2025-09-01T18:02:40:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection.py", line 124, in _connect
+2025-09-01T18:02:40:     stream = await self._network_backend.connect_tcp(**kwargs)
+2025-09-01T18:02:40:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+2025-09-01T18:02:40:     return await self._backend.connect_tcp(
+2025-09-01T18:02:40:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+2025-09-01T18:02:40:     with map_exceptions(exc_map):
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 155, in __exit__
+2025-09-01T18:02:40:     self.gen.throw(typ, value, traceback)
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+2025-09-01T18:02:40:     raise to_exc(exc) from exc
+2025-09-01T18:02:40: httpcore.ConnectError: All connection attempts failed
+2025-09-01T18:02:40: 
+2025-09-01T18:02:40: The above exception was the direct cause of the following exception:
+2025-09-01T18:02:40: 
+2025-09-01T18:02:40: Traceback (most recent call last):
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_query.py", line 368, in spawn
+2025-09-01T18:02:40:     data = await self.request('GET', '/status')
+2025-09-01T18:02:40:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_http.py", line 217, in request
+2025-09-01T18:02:40:     response = await self.session.request(method, url, **kwargs)
+2025-09-01T18:02:40:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/_async_http.py", line 26, in request
+2025-09-01T18:02:40:     return Response(await self.session.request(method, url, **kwargs))
+2025-09-01T18:02:40:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1540, in request
+2025-09-01T18:02:40:     return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+2025-09-01T18:02:40:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1629, in send
+2025-09-01T18:02:40:     response = await self._send_handling_auth(
+2025-09-01T18:02:40:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+2025-09-01T18:02:40:     response = await self._send_handling_redirects(
+2025-09-01T18:02:40:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+2025-09-01T18:02:40:     response = await self._send_single_request(request)
+2025-09-01T18:02:40:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1730, in _send_single_request
+2025-09-01T18:02:40:     response = await transport.handle_async_request(request)
+2025-09-01T18:02:40:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+2025-09-01T18:02:40:     with map_httpcore_exceptions():
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 155, in __exit__
+2025-09-01T18:02:40:     self.gen.throw(typ, value, traceback)
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+2025-09-01T18:02:40:     raise mapped_exc(message) from exc
+2025-09-01T18:02:40: httpx.ConnectError: All connection attempts failed
+2025-09-01T18:02:40: 
+2025-09-01T18:02:40: The above exception was the direct cause of the following exception:
+2025-09-01T18:02:40: 
+2025-09-01T18:02:40: Traceback (most recent call last):
+2025-09-01T18:02:40:   File "/Users/aayushkaayushumar/Desktop/blog/blogwriter_CrewAi/src/database/connection.py", line 44, in connect
+2025-09-01T18:02:40:     await self.db.connect()
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/_base_client.py", line 442, in connect
+2025-09-01T18:02:40:     await self._internal_engine.connect(
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_query.py", line 350, in connect
+2025-09-01T18:02:40:     await self.spawn(file, timeout=timeout, datasources=datasources)
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_query.py", line 389, in spawn
+2025-09-01T18:02:40:     raise errors.EngineConnectionError('Could not connect to the query engine') from last_exc
+2025-09-01T18:02:40: prisma.engine.errors.EngineConnectionError: Could not connect to the query engine
+2025-09-01T18:02:40: 
+2025-09-01T18:02:40: During handling of the above exception, another exception occurred:
+2025-09-01T18:02:40: 
+2025-09-01T18:02:40: Traceback (most recent call last):
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/routing.py", line 694, in lifespan
+2025-09-01T18:02:40:     async with self.lifespan_context(app) as maybe_state:
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 204, in __aenter__
+2025-09-01T18:02:40:     return await anext(self.gen)
+2025-09-01T18:02:40:            ^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:02:40:   File "/Users/aayushkaayushumar/Desktop/blog/blogwriter_CrewAi/main.py", line 49, in lifespan
+2025-09-01T18:02:40:     await db_manager.connect()
+2025-09-01T18:02:40:   File "/Users/aayushkaayushumar/Desktop/blog/blogwriter_CrewAi/src/database/connection.py", line 55, in connect
+2025-09-01T18:02:40:     await asyncio.sleep(retry_delay)
+2025-09-01T18:02:40:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/tasks.py", line 639, in sleep
+2025-09-01T18:02:40:     return await future
+2025-09-01T18:02:40:            ^^^^^^^^^^^^
+2025-09-01T18:02:40: asyncio.exceptions.CancelledError
+2025-09-01T18:02:40: 
+2025-09-01T18:02:43: /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:918: UserWarning: Mixing V1 models and V2 models (or constructs, like `TypeAdapter`) is not supported. Please upgrade `CrewAgentExecutor` to V2.
+2025-09-01T18:02:43:   warn(
+2025-09-01T18:02:44: INFO:     Started server process [1862]
+2025-09-01T18:02:44: INFO:     Waiting for application startup.
+2025-09-01T18:02:49: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
+2025-09-01T18:02:54: 2025-09-01 18:02:54,879 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 1 failed: Could not connect to the query engine
+2025-09-01T18:03:04: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
+2025-09-01T18:03:10: 2025-09-01 18:03:10,291 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 2 failed: Could not connect to the query engine
+2025-09-01T18:03:20: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
+2025-09-01T18:03:25: 2025-09-01 18:03:25,675 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 3 failed: Could not connect to the query engine
+2025-09-01T18:03:25: 2025-09-01 18:03:25,676 - 8436162752 - connection.py-connection:51 - ERROR: All database connection attempts failed
+2025-09-01T18:03:25: 2025-09-01 18:03:25,676 - 8436162752 - main.py-main:61 - ERROR: Error during startup: Could not connect to the query engine
+2025-09-01T18:03:25: ERROR:    Traceback (most recent call last):
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+2025-09-01T18:03:25:     yield
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+2025-09-01T18:03:25:     resp = await self._pool.handle_async_request(req)
+2025-09-01T18:03:25:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+2025-09-01T18:03:25:     raise exc from None
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+2025-09-01T18:03:25:     response = await connection.handle_async_request(
+2025-09-01T18:03:25:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+2025-09-01T18:03:25:     raise exc
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+2025-09-01T18:03:25:     stream = await self._connect(request)
+2025-09-01T18:03:25:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_async/connection.py", line 124, in _connect
+2025-09-01T18:03:25:     stream = await self._network_backend.connect_tcp(**kwargs)
+2025-09-01T18:03:25:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+2025-09-01T18:03:25:     return await self._backend.connect_tcp(
+2025-09-01T18:03:25:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+2025-09-01T18:03:25:     with map_exceptions(exc_map):
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 155, in __exit__
+2025-09-01T18:03:25:     self.gen.throw(typ, value, traceback)
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+2025-09-01T18:03:25:     raise to_exc(exc) from exc
+2025-09-01T18:03:25: httpcore.ConnectError: All connection attempts failed
+2025-09-01T18:03:25: 
+2025-09-01T18:03:25: The above exception was the direct cause of the following exception:
+2025-09-01T18:03:25: 
+2025-09-01T18:03:25: Traceback (most recent call last):
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_query.py", line 368, in spawn
+2025-09-01T18:03:25:     data = await self.request('GET', '/status')
+2025-09-01T18:03:25:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_http.py", line 217, in request
+2025-09-01T18:03:25:     response = await self.session.request(method, url, **kwargs)
+2025-09-01T18:03:25:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/_async_http.py", line 26, in request
+2025-09-01T18:03:25:     return Response(await self.session.request(method, url, **kwargs))
+2025-09-01T18:03:25:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1540, in request
+2025-09-01T18:03:25:     return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+2025-09-01T18:03:25:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1629, in send
+2025-09-01T18:03:25:     response = await self._send_handling_auth(
+2025-09-01T18:03:25:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+2025-09-01T18:03:25:     response = await self._send_handling_redirects(
+2025-09-01T18:03:25:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+2025-09-01T18:03:25:     response = await self._send_single_request(request)
+2025-09-01T18:03:25:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_client.py", line 1730, in _send_single_request
+2025-09-01T18:03:25:     response = await transport.handle_async_request(request)
+2025-09-01T18:03:25:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+2025-09-01T18:03:25:     with map_httpcore_exceptions():
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 155, in __exit__
+2025-09-01T18:03:25:     self.gen.throw(typ, value, traceback)
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+2025-09-01T18:03:25:     raise mapped_exc(message) from exc
+2025-09-01T18:03:25: httpx.ConnectError: All connection attempts failed
+2025-09-01T18:03:25: 
+2025-09-01T18:03:25: The above exception was the direct cause of the following exception:
+2025-09-01T18:03:25: 
+2025-09-01T18:03:25: Traceback (most recent call last):
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/starlette/routing.py", line 694, in lifespan
+2025-09-01T18:03:25:     async with self.lifespan_context(app) as maybe_state:
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 204, in __aenter__
+2025-09-01T18:03:25:     return await anext(self.gen)
+2025-09-01T18:03:25:            ^^^^^^^^^^^^^^^^^^^^^
+2025-09-01T18:03:25:   File "/Users/aayushkaayushumar/Desktop/blog/blogwriter_CrewAi/main.py", line 49, in lifespan
+2025-09-01T18:03:25:     await db_manager.connect()
+2025-09-01T18:03:25:   File "/Users/aayushkaayushumar/Desktop/blog/blogwriter_CrewAi/src/database/connection.py", line 44, in connect
+2025-09-01T18:03:25:     await self.db.connect()
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/_base_client.py", line 442, in connect
+2025-09-01T18:03:25:     await self._internal_engine.connect(
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_query.py", line 350, in connect
+2025-09-01T18:03:25:     await self.spawn(file, timeout=timeout, datasources=datasources)
+2025-09-01T18:03:25:   File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/prisma/engine/_query.py", line 389, in spawn
+2025-09-01T18:03:25:     raise errors.EngineConnectionError('Could not connect to the query engine') from last_exc
+2025-09-01T18:03:25: prisma.engine.errors.EngineConnectionError: Could not connect to the query engine
+2025-09-01T18:03:25: 
+2025-09-01T18:03:25: ERROR:    Application startup failed. Exiting.
+2025-09-01T18:03:32: /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:918: UserWarning: Mixing V1 models and V2 models (or constructs, like `TypeAdapter`) is not supported. Please upgrade `CrewAgentExecutor` to V2.
+2025-09-01T18:03:32:   warn(
+2025-09-01T18:03:33: INFO:     Started server process [7698]
+2025-09-01T18:03:33: INFO:     Waiting for application startup.
+2025-09-01T18:03:38: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
+2025-09-01T18:03:43: 2025-09-01 18:03:43,937 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 1 failed: Could not connect to the query engine

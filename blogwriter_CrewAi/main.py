@@ -51,9 +51,9 @@ async def lifespan(app: FastAPI):
         
         # Start the scheduler
         if not scheduler_started:
-            blog_scheduler.start_scheduler(interval_minutes=10)
+            blog_scheduler.start_scheduler(interval_minutes=1440)  # 1 day = 1440 minutes
             scheduler_started = True
-            logger.info("Blog scheduler started successfully")
+            logger.info("Blog scheduler started successfully - generating posts every 24 hours")
         
         logger.info("Application startup completed!")
         
@@ -366,8 +366,8 @@ async def main():
         logger.info("Database connected")
         
         # Start scheduler
-        blog_scheduler.start_scheduler(interval_minutes=10)
-        logger.info("Scheduler started - generating blog posts every 10 minutes")
+        blog_scheduler.start_scheduler(interval_minutes=1440)  # 1 day = 1440 minutes
+        logger.info("Scheduler started - generating blog posts every 24 hours")
         
         # Generate first blog post immediately
         logger.info("Generating initial blog post...")

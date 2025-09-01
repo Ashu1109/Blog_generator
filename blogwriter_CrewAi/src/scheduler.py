@@ -77,7 +77,7 @@ class BlogScheduler:
         except Exception as e:
             logger.error(f"Error getting generation stats: {e}")
     
-    def start_scheduler(self, interval_minutes: int = 10):
+    def start_scheduler(self, interval_minutes: int = 1440):  # Default to 1 day
         """Start the blog generation scheduler."""
         try:
             if self._running:
@@ -116,7 +116,11 @@ class BlogScheduler:
             self._running = True
             
             logger.info(f"Blog scheduler started successfully!")
-            logger.info(f"Blog generation interval: {interval_minutes} minutes")
+            if interval_minutes >= 1440:
+                hours = interval_minutes // 60
+                logger.info(f"Blog generation interval: {hours} hours ({interval_minutes} minutes)")
+            else:
+                logger.info(f"Blog generation interval: {interval_minutes} minutes")
             logger.info("Next job times:")
             
             for job in self.scheduler.get_jobs():

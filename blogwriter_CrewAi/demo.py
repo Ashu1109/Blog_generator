@@ -115,7 +115,7 @@ async def demo_scheduler():
         from src.scheduler import blog_scheduler
         
         print("Scheduler features:")
-        print("  • Automatic blog generation every 10 minutes (configurable)")
+        print("  • Automatic blog generation every 24 hours (configurable)")
         print("  • Random theme selection (GenAI or Blockchain)")
         print("  • Statistics reporting every hour")
         print("  • Daily cleanup jobs")
@@ -146,7 +146,7 @@ def show_api_examples():
         ("Custom Topic + Theme", "POST /generate", 'curl -X POST "http://localhost:8000/generate" -H "Content-Type: application/json" -d \'{"topic": "DeFi innovations", "theme": "blockchain"}\''),
         ("Get Recent Posts", "GET /posts", "curl http://localhost:8000/posts?limit=5"),
         ("Get Statistics", "GET /stats", "curl http://localhost:8000/stats?hours=24"),
-        ("Start Scheduler", "POST /scheduler/start", 'curl -X POST "http://localhost:8000/scheduler/start" -H "Content-Type: application/json" -d \'{"interval_minutes": 10}\''),
+        ("Start Scheduler", "POST /scheduler/start", 'curl -X POST "http://localhost:8000/scheduler/start" -H "Content-Type: application/json" -d \'{"interval_minutes": 1440}\''),
     ]
     
     for name, endpoint, example in examples:
