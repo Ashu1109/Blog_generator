@@ -26,15 +26,23 @@ const BlogPost = () => {
         }
         const data = await response.json();
 
+        // Clean up markdown content by removing markdown code block wrapper
+        const cleanContent = (content: string) => {
+          if (content.startsWith("```markdown\n")) {
+            return content.replace(/^```markdown\n/, "").replace(/\n```$/, "");
+          }
+          return content;
+        };
+
         const transformedPost: BlogPostType = {
           id: data.id.toString(),
           title: data.title,
           excerpt:
             data.meta_description ||
             (data.content
-              ? data.content.slice(0, 150) + "..."
+              ? cleanContent(data.content).slice(0, 150) + "..."
               : "No excerpt available"),
-          content: data.content || "",
+          content: cleanContent(data.content || ""),
           category:
             data.topic === "GenAI" || data.topic === "Blockchain"
               ? data.topic
