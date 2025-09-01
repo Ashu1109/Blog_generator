@@ -53,7 +53,7 @@ def create_blog_writer_crew():
         agents=[writer_agent],
         tasks=[writing_task],
         process=Process.sequential,
-        verbose=2,
+        verbose=True,
         output_json=True # Force the output to be JSON
     )
     
