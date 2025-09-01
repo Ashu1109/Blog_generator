@@ -201,7 +201,7 @@ class EnhancedBlogGenerator:
             Use appropriate blockchain terminology and explain technical concepts clearly.
             Include relevant market data, adoption statistics, and regulatory updates.
             """
-            tags_example = "**Tags:** blockchain, cryptocurrency, DeFi, Web3, Bitcoin"
+            tags_example = "**Tags:** Blockchain, Cryptocurrency, DeFi, Web3, Smart Contracts"
         else:
             content_guidance = """
             Content should cover:
@@ -214,7 +214,7 @@ class EnhancedBlogGenerator:
             Use appropriate AI/ML terminology and explain technical concepts clearly.
             Include relevant research findings, adoption statistics, and industry insights.
             """
-            tags_example = "**Tags:** AI, machine learning, generative AI, technology, innovation"
+            tags_example = "**Tags:** Generative AI, Machine Learning, Artificial Intelligence, Technology, Innovation"
         
         return Task(
             description=f"""
@@ -281,8 +281,13 @@ class EnhancedBlogGenerator:
             agent=self.editor_agent,
         )
     
-    def extract_blog_components(self, crew_output: str) -> Dict[str, Any]:
-        """Extract title, content, and tags from crew output."""
+    def extract_blog_components(self, crew_output: str, theme: str = "genai") -> Dict[str, Any]:
+        """Extract title, content, and tags from crew output.
+        
+        Args:
+            crew_output: The output from the crew
+            theme: The theme used for generation ('genai' or 'blockchain')
+        """
         try:
             # Clean the output
             content = crew_output.strip()
@@ -322,10 +327,65 @@ class EnhancedBlogGenerator:
                     # Split by common delimiters
                     tags = [tag.strip().strip(',').strip() for tag in re.split(r'[,;|]', tags_text)]
                     tags = [tag for tag in tags if tag and len(tag) > 1]
+                    
+                    # Normalize tag capitalization for consistency
+                    normalized_tags = []
+                    for tag in tags:
+                        tag_lower = tag.lower()
+                        # Map common tags to proper capitalization
+                        tag_mapping = {
+                            'blockchain': 'Blockchain',
+                            'cryptocurrency': 'Cryptocurrency', 
+                            'bitcoin': 'Bitcoin',
+                            'ethereum': 'Ethereum',
+                            'defi': 'DeFi',
+                            'nft': 'NFT',
+                            'web3': 'Web3',
+                            'dao': 'DAO',
+                            'smart contracts': 'Smart Contracts',
+                            'smart contract': 'Smart Contracts',
+                            'ai': 'Artificial Intelligence',
+                            'artificial intelligence': 'Artificial Intelligence',
+                            'machine learning': 'Machine Learning',
+                            'deep learning': 'Deep Learning',
+                            'llm': 'Large Language Models',
+                            'generative ai': 'Generative AI',
+                            'technology': 'Technology',
+                            'innovation': 'Innovation'
+                        }
+                        
+                        normalized_tag = tag_mapping.get(tag_lower, tag.title())
+                        normalized_tags.append(normalized_tag)
+                    
+                    tags = normalized_tags
                     break
             
-            # Default tags if none found
+            # Default tags if none found - theme-aware
             if not tags:
+                if theme.lower() == "blockchain":
+                    tags = ["Blockchain", "Cryptocurrency", "Web3", "Decentralized Finance", "Technology"]
+                else:
+                    tags = ["Generative AI", "Artificial Intelligence", "Technology", "Machine Learning", "Innovation"]
+            
+            # Auto-detect theme from content if tags don't match theme
+            blockchain_keywords = [
+                'blockchain', 'bitcoin', 'cryptocurrency', 'defi', 'nft', 'ethereum', 
+                'smart contract', 'decentralized', 'web3', 'dao', 'cbdc', 'tokenization',
+                'consensus', 'mining', 'wallet', 'dapp', 'protocol'
+            ]
+            
+            content_lower = content.lower()
+            title_lower = title.lower()
+            
+            # Check if content is actually blockchain-themed
+            is_blockchain_content = any(keyword in content_lower or keyword in title_lower for keyword in blockchain_keywords)
+            
+            # Override tags if content theme doesn't match provided theme
+            if is_blockchain_content and theme.lower() != "blockchain":
+                # Content is blockchain but theme was genai - fix the tags
+                tags = ["Blockchain", "Cryptocurrency", "Web3", "Technology", "Innovation"]
+            elif not is_blockchain_content and theme.lower() == "blockchain":
+                # Content is genai but theme was blockchain - fix the tags  
                 tags = ["Generative AI", "Artificial Intelligence", "Technology", "Machine Learning", "Innovation"]
             
             # Extract meta description if present
@@ -428,8 +488,8 @@ class EnhancedBlogGenerator:
                 await log_generation(topic, "failed", "No output generated from crew")
                 return None
             
-            # Extract components
-            blog_components = self.extract_blog_components(str(result))
+            # Extract components with theme context
+            blog_components = self.extract_blog_components(str(result), theme=theme)
             
             # Save to database
             blog_post = await save_blog_post(
