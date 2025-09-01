@@ -127,3 +127,68 @@ All colors MUST be HSL.
     overflow: hidden;
   }
 }
+
+@layer components {
+  /* Custom prose styling for dark theme */
+  .prose {
+    @apply text-foreground;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-foreground font-bold;
+  }
+  
+  .prose h1 {
+    @apply text-3xl mb-6 mt-8;
+  }
+  
+  .prose h2 {
+    @apply text-2xl mb-4 mt-8;
+  }
+  
+  .prose h3 {
+    @apply text-xl mb-3 mt-6;
+  }
+  
+  .prose p {
+    @apply text-foreground mb-4 leading-relaxed;
+  }
+  
+  .prose ul,
+  .prose ol {
+    @apply text-foreground mb-4;
+  }
+  
+  .prose li {
+    @apply text-foreground mb-1;
+  }
+  
+  .prose strong {
+    @apply text-foreground font-semibold;
+  }
+  
+  .prose em {
+    @apply text-foreground italic;
+  }
+  
+  .prose code {
+    @apply text-accent bg-secondary px-1 py-0.5 rounded text-sm;
+  }
+  
+  .prose pre {
+    @apply bg-secondary text-foreground p-4 rounded-lg overflow-x-auto;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-border pl-4 text-muted-foreground italic;
+  }
+  
+  .prose a {
+    @apply text-primary hover:text-accent transition-colors;
+  }
+}
