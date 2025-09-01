@@ -33,16 +33,26 @@ class DatabaseManager:
         # Limit length
         return slug[:100]
     
-    async def connect(self):
-        """Connect to the database."""
-        if not self._connected:
+    async def connect(self, retries: int = 3, retry_delay: int = 5):
+        """Connect to the database with retry logic."""
+        if self._connected:
+            return
+            
+        for attempt in range(retries):
             try:
+                logger.info(f"Attempting database connection (attempt {attempt + 1}/{retries})...")
                 await self.db.connect()
                 self._connected = True
                 logger.info("Connected to database successfully")
+                return
             except Exception as e:
-                logger.error(f"Failed to connect to database: {e}")
-                raise
+                logger.error(f"Database connection attempt {attempt + 1} failed: {e}")
+                if attempt == retries - 1:
+                    logger.error("All database connection attempts failed")
+                    raise
+                else:
+                    logger.info(f"Retrying in {retry_delay} seconds...")
+                    await asyncio.sleep(retry_delay)
     
     async def disconnect(self):
         """Disconnect from the database."""
@@ -53,6 +63,19 @@ class DatabaseManager:
                 logger.info("Disconnected from database")
             except Exception as e:
                 logger.error(f"Error disconnecting from database: {e}")
+    
+    async def health_check(self):
+        """Check if database connection is healthy."""
+        try:
+            if not self._connected:
+                return False
+            # Try a simple query to test connection
+            await self.db.query_raw("SELECT 1")
+            return True
+        except Exception as e:
+            logger.error(f"Database health check failed: {e}")
+            self._connected = False
+            return False
     
     async def create_blog_post(
         self,

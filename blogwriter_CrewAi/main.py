@@ -9,6 +9,7 @@ import asyncio
 import logging
 import signal
 import sys
+from contextlib import asynccontextmanager
 from typing import Optional
 from datetime import datetime
 
@@ -32,42 +33,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# FastAPI app
-app = FastAPI(
-    title="AI Blog Generator",
-    description="Automated blog generation system for generative AI topics",
-    version="1.0.0"
-)
-
-# CORS middleware
-origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:8081",
-    "http://localhost:5173",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Pydantic models for API
-class BlogGenerationRequest(BaseModel):
-    topic: Optional[str] = None
-    
-class SchedulerConfig(BaseModel):
-    interval_minutes: int = 10
-
 # Global variables
 scheduler_started = False
 
-@app.on_event("startup")
-async def startup_event():
-    """Initialize the application on startup."""
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Handle application startup and shutdown."""
+    # Startup
     try:
         logger.info("Starting AI Blog Generator application...")
         
@@ -87,10 +59,10 @@ async def startup_event():
     except Exception as e:
         logger.error(f"Error during startup: {e}")
         raise
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Clean up resources on shutdown."""
+    
+    yield
+    
+    # Shutdown
     try:
         logger.info("Shutting down AI Blog Generator application...")
         
@@ -109,6 +81,37 @@ async def shutdown_event():
         
     except Exception as e:
         logger.error(f"Error during shutdown: {e}")
+
+# FastAPI app
+app = FastAPI(
+    title="AI Blog Generator",
+    description="Automated blog generation system for generative AI topics",
+    version="1.0.0",
+    lifespan=lifespan
+)
+
+# CORS middleware
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins="*",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Pydantic models for API
+class BlogGenerationRequest(BaseModel):
+    topic: Optional[str] = None
+    
+class SchedulerConfig(BaseModel):
+    interval_minutes: int = 10
 
 # API Endpoints
 
@@ -133,21 +136,40 @@ async def root():
 async def health_check():
     """Health check endpoint."""
     try:
-        # Check database connection
-        await db_manager.connect()
+        # Check database health
+        db_healthy = await db_manager.health_check()
+        if not db_healthy:
+            # Try to reconnect
+            await db_manager.connect()
+            db_healthy = await db_manager.health_check()
         
-        return {
-            "status": "healthy",
+        status = "healthy" if db_healthy else "unhealthy"
+        status_code = 200 if db_healthy else 503
+        
+        response_data = {
+            "status": status,
             "timestamp": datetime.now().isoformat(),
-            "database": "connected",
+            "database": "connected" if db_healthy else "disconnected",
             "scheduler": "running" if blog_scheduler.is_running() else "stopped"
         }
+        
+        if db_healthy:
+            return response_data
+        else:
+            return JSONResponse(
+                status_code=status_code,
+                content=response_data
+            )
+            
     except Exception as e:
+        logger.error(f"Health check error: {e}")
         return JSONResponse(
             status_code=503,
             content={
                 "status": "unhealthy",
                 "timestamp": datetime.now().isoformat(),
+                "database": "error",
+                "scheduler": "unknown",
                 "error": str(e)
             }
         )
