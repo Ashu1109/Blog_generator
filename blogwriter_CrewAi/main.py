@@ -39,6 +39,8 @@ scheduler_started = False
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Handle application startup and shutdown."""
+    global scheduler_started
+    
     # Startup
     try:
         logger.info("Starting AI Blog Generator application...")
@@ -48,7 +50,6 @@ async def lifespan(app: FastAPI):
         logger.info("Database connected successfully")
         
         # Start the scheduler
-        global scheduler_started
         if not scheduler_started:
             blog_scheduler.start_scheduler(interval_minutes=10)
             scheduler_started = True
@@ -67,7 +68,6 @@ async def lifespan(app: FastAPI):
         logger.info("Shutting down AI Blog Generator application...")
         
         # Stop scheduler
-        global scheduler_started
         if scheduler_started:
             blog_scheduler.stop_scheduler()
             scheduler_started = False
