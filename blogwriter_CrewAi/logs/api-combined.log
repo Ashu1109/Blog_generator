@@ -514,3 +514,7 @@
 2025-09-01T18:03:33: INFO:     Waiting for application startup.
 2025-09-01T18:03:38: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
 2025-09-01T18:03:43: 2025-09-01 18:03:43,937 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 1 failed: Could not connect to the query engine
+2025-09-01T18:03:54: {"is_panic":false,"message":"Can't reach database server at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`\n\nPlease make sure your database server is running at `ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech:5432`.","meta":{"database_host":"ep-proud-dust-a1wqu14s-pooler.ap-southeast-1.aws.neon.tech","database_port":5432},"error_code":"P1001"}
+2025-09-01T18:03:59: 2025-09-01 18:03:59,406 - 8436162752 - connection.py-connection:49 - ERROR: Database connection attempt 2 failed: Could not connect to the query engine
+2025-09-01T18:04:09: INFO:     Application startup complete.
+2025-09-01T18:04:09: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
