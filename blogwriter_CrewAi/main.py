@@ -87,7 +87,8 @@ app = FastAPI(
     title="AI Blog Generator",
     description="Automated blog generation system for generative AI topics",
     version="1.0.0",
-    lifespan=lifespan
+    lifespan=lifespan,
+    root_path="/blog_server"
 )
 
 # CORS middleware
